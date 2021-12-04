@@ -1,4 +1,4 @@
 /docker/data
 /docker/logs
 /src/vendor
-/src/var/*
+/src/var
