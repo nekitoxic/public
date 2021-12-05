@@ -24,4 +24,9 @@ class EntityFactory implements AbstractFactory
     {
         return new ProductPropertyBuidler();
     }
+
+    public static function createProductCategory(): FactoryBuilderInterface
+    {
+        return new ProductPropertyBuidler();
+    }
 }

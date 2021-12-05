@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,7 +25,7 @@ class ProductRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->where('p.productProperty IS NULL')
             ->andWhere('p.uuid = :uuid')
-            ->setParameter('uuid', $uuid)
+            ->setParameter('uuid', Uuid::fromString($uuid)->toBinary())
             ->getQuery()
             ->getOneOrNullResult();
     }

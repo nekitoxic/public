@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\ProductCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: ProductCategoryRepository::class)]
@@ -16,10 +16,11 @@ class ProductCategory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
+    #[Ignore]
     private int $id;
 
     #[ORM\Column(type: 'uuid', unique:TRUE)]
-    #[Groups([Product::MY_GROUP, Category::MY_GROUP])]
+    #[Groups([Product::MY_GROUP, Category::MY_GROUP, self::MY_GROUP])]
     private Uuid $uuid;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'productCategories')]

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
@@ -9,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Uid\Uuid;
-use Symfony\Component\Uid\UuidV6;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -19,6 +18,7 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
+    #[Ignore]
     private int $id;
 
     #[ORM\Column(type: Types::STRING, length: 255)]

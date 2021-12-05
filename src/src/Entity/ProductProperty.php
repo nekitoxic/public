@@ -1,11 +1,12 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\ProductPropertyRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: ProductPropertyRepository::class)]
@@ -16,6 +17,7 @@ class ProductProperty
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
+    #[Ignore]
     private int $id;
 
     #[ORM\Column(type: 'uuid', unique:TRUE)]
@@ -25,6 +27,7 @@ class ProductProperty
     #[ORM\OneToOne(inversedBy: 'productProperty', targetEntity: Product::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups([self::MY_GROUP])]
+    #[MaxDepth(1)]
     private Product $product;
 
     #[ORM\Column(type: Types::INTEGER, options:["default" => 0])]

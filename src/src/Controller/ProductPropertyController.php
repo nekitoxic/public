@@ -55,8 +55,6 @@ class ProductPropertyController extends AbstractController
     #[Route('api/product-properties', name: 'product_properties_create', methods:[Request::METHOD_POST])]
     public function create(Request $request): JsonResponse
     {
-        //1ec5570a-7937-6d52-ac85-ad703b0ce4cd
-
         $product = $this->productRepository->findOneActualProduct(
                 json_decode($request->getContent(), true)['product'] ?? null
         );
@@ -65,8 +63,11 @@ class ProductPropertyController extends AbstractController
             return $this->json("Syntax error", 404);
         }
 
+        $productProperty = (new ProductProperty())->setProduct($product);
+        $product->setProductProperty($productProperty);
+
         $responseArray = $this->responseService->getResponse(
-            (new ProductProperty())->setProduct($product),
+            $productProperty,
             ObjectStatus::Create,
             json_decode($request->getContent(), true)
         );
