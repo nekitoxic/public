@@ -57,12 +57,8 @@ class ProductCategoryController extends AbstractController
     public function create(Request $request): JsonResponse
     {
         $dataArray  = json_decode($request->getContent(), true);
-
         $product    = $this->productRepository->findOneBy(['uuid' => $dataArray['product'] ?? null]);
         $category   = $this->categoryRepository->findOneBy(['uuid' => $dataArray['category'] ?? null]);
-
-        // category 1ec556cd-95ce-6656-9c81-f3e841d827e9
-        // product 1ec5594d-53b2-6434-8678-d99863dfa8f2
 
         if(null === $product || null === $category) {
             return $this->json("Syntax error", 404);
@@ -87,7 +83,6 @@ class ProductCategoryController extends AbstractController
         }
 
         $dataArray      = json_decode($request->getContent(), true);
-
         $productID      = $dataArray['product'] ?? null;
         $categoryID     = $dataArray['category'] ?? null;
 
