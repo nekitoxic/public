@@ -19,6 +19,7 @@ services:
     volumes:
       - ./src:/var/www/html/
     working_dir: /var/www/html/
+    
   mysql:
     image: mysql:8
     container_name: mysql
