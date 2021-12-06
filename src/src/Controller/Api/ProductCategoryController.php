@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\ProductCategory;
 use App\Repository\CategoryRepository;

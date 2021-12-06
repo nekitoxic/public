@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Service\Factory;
 
 use App\Service\Factory\Interface\FactoryBuilderInterface;

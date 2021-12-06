@@ -4,7 +4,7 @@ namespace App\Service\Factory\Builder;
 use App\Entity\ProductProperty;
 use App\Service\Factory\Interface\FactoryBuilderInterface;
 
-class ProductPropertyBuidler implements FactoryBuilderInterface
+class ProductCategoryBuilder implements FactoryBuilderInterface
 {
     public function build(object $productProperty, array $data): ProductProperty
     {

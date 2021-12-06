@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Service\Factory;
 
 use App\Service\Factory\Builder\CategoryBuilder;
 use App\Service\Factory\Builder\ProductBuilder;
-use App\Service\Factory\Builder\ProductPropertyBuidler;
+use App\Service\Factory\Builder\ProductPropertyBuilder;
 use App\Service\Factory\Interface\FactoryBuilderInterface;
-
 
 class EntityFactory implements AbstractFactory
 {
@@ -22,11 +20,11 @@ class EntityFactory implements AbstractFactory
 
     public static function createProductProperty(): FactoryBuilderInterface
     {
-        return new ProductPropertyBuidler();
+        return new ProductPropertyBuilder();
     }
 
     public static function createProductCategory(): FactoryBuilderInterface
     {
-        return new ProductPropertyBuidler();
+        return new ProductPropertyBuilder();
     }
 }
