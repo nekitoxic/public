@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\HttpFoundation\Request;
 use App\Enum\ObjectStatus;
+use App\Service\Factory\Builder\CategoryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CategoryController extends AbstractController
@@ -53,7 +54,7 @@ class CategoryController extends AbstractController
     public function create(Request $request): JsonResponse
     {
         $responseArray = $this->responseService->getResponse(
-            new Category(),
+            CategoryBuilder::create(),
             ObjectStatus::Create,
             json_decode($request->getContent(), true)
         );

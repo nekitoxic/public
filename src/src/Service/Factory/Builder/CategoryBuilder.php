@@ -10,4 +10,9 @@ class CategoryBuilder implements FactoryBuilderInterface
     {
         return $category->setName($data['name']);
     }
+
+    public static function create(): object
+    {
+        return new Category();
+    }
 }

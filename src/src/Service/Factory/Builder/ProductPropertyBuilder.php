@@ -13,4 +13,9 @@ class ProductPropertyBuilder implements FactoryBuilderInterface
                 ->setWeight($data['weight'])
                 ->setHeight($data['height']);
     }
+
+    public static function create(): object
+    {
+        return new ProductProperty();
+    }
 }

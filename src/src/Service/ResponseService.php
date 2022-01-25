@@ -9,6 +9,7 @@ use App\Service\Factory\EntityFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Enum\ResponseType;
 use App\Enum\ObjectStatus;
+use App\Service\Factory\Interface\FactoryBuilderInterface;
 
 class ResponseService
 {
@@ -41,7 +42,9 @@ class ResponseService
         if (null === $this->errorMessage) {
             $responseArray['status']            = $status->value;
             $responseArray['groups']            = ['groups' => [$entity::MY_GROUP]];
-            $responseArray['responseData']      = $this->entitySave($this->getBuilderByType()->build($entity, $this->requestData));
+            $responseArray['responseData']      = $this->entitySave(
+                EntityFactory::getBuilderByType($this->type)->build($entity, $this->requestData)
+            );
         }
 
         return $responseArray;
@@ -54,15 +57,6 @@ class ResponseService
             Product::class          => $this->type = ResponseType::ProductType,
             ProductProperty::class  => $this->type = ResponseType::ProductPropertyType,
             default                 => $this->type = ResponseType::Undefined
-        };
-    }
-
-    private function getBuilderByType()
-    {
-        return match ($this->type) {
-            ResponseType::CategoryType          => EntityFactory::createCategory(),
-            ResponseType::ProductType           => EntityFactory::createProduct(),
-            ResponseType::ProductPropertyType   => EntityFactory::createProductProperty(),
         };
     }
 

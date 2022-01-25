@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Enum\ObjectStatus;
 use App\Repository\ProductPropertyRepository;
 use App\Repository\ProductRepository;
+use App\Service\Factory\Builder\ProductPropertyBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProductPropertyController extends AbstractController
@@ -63,7 +64,7 @@ class ProductPropertyController extends AbstractController
             return $this->json("Syntax error", 404);
         }
 
-        $productProperty = (new ProductProperty())->setProduct($product);
+        $productProperty = ProductPropertyBuilder::create()->setProduct($product);
         $product->setProductProperty($productProperty);
 
         $responseArray = $this->responseService->getResponse(

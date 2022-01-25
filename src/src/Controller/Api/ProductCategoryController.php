@@ -5,6 +5,7 @@ use App\Entity\ProductCategory;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductCategoryRepository;
 use App\Repository\ProductRepository;
+use App\Service\Factory\Builder\ProductCategoryBuilder;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -63,7 +64,10 @@ class ProductCategoryController extends AbstractController
             return $this->json("Syntax error", 404);
         }
 
-        $productCategory = (new ProductCategory())->setProduct($product)->setCategory($category);
+        $productCategory = 
+            ProductCategoryBuilder::create()
+                ->setProduct($product)
+                ->setCategory($category);
 
         $this->em->persist($productCategory);
         $this->em->flush();

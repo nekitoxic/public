@@ -3,7 +3,7 @@ namespace App\Service\Factory;
 
 use App\Service\Factory\Interface\FactoryBuilderInterface;
 
-interface AbstractFactory
+interface AbstractFactoryInteface
 {
     public static function createCategory(): FactoryBuilderInterface;
 

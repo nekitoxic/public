@@ -12,4 +12,9 @@ class ProductBuilder implements FactoryBuilderInterface
                 ->setName($data['name'])
                 ->setPrice($data['price']);
     }
+
+    public static function create(): object
+    {
+        return new Product();
+    }
 }
