@@ -1,10 +1,10 @@
-# TEST
+# PUBLIC
 
-# build docker
-    docker-compose up -d --build
+# build docker & up container
+    docker-compose up
 
-# install composer
-    docker-compose exec fpm composer install
+# Apply migrations
+    docker-compose exec fpm bin/console d:m:m
 
 # Fixtures load
     docker-compose exec fpm bin/console d:f:l
