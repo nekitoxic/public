@@ -34,3 +34,10 @@ services:
       - ./docker/logs/mysql:/var/log/mysql
     ports:
       - "3307:3306"
+
+  composer_installation:
+    container_name: composer_installation
+    image: composer
+    volumes:
+      - ./src/:/app
+    command: sh -c "composer install"

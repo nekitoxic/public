@@ -9,7 +9,6 @@ use App\Service\Factory\EntityFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Enum\ResponseType;
 use App\Enum\ObjectStatus;
-use App\Service\Factory\Interface\FactoryBuilderInterface;
 
 class ResponseService
 {

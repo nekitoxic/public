@@ -1,7 +1,7 @@
 <?php
-namespace App\Service\Factory\Interface;
+namespace App\Service\Factory\Builder;
 
-interface FactoryBuilderInterface
+interface BuilderInterface
 {
     public function build(object $entity, array $data): object;
 

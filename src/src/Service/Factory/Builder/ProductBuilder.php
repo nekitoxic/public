@@ -2,9 +2,8 @@
 namespace App\Service\Factory\Builder;
 
 use App\Entity\Product;
-use App\Service\Factory\Interface\FactoryBuilderInterface;
 
-class ProductBuilder implements FactoryBuilderInterface
+class ProductBuilder implements BuilderInterface
 {
     public function build(object $product, array $data): Product
     {

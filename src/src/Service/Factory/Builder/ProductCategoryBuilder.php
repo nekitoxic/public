@@ -2,9 +2,8 @@
 namespace App\Service\Factory\Builder;
 
 use App\Entity\ProductCategory;
-use App\Service\Factory\Interface\FactoryBuilderInterface;
 
-class ProductCategoryBuilder implements FactoryBuilderInterface
+class ProductCategoryBuilder implements BuilderInterface
 {
     public function build(object $productProperty, array $data): ProductCategory
     {
