@@ -1,9 +1,6 @@
 <?php
 namespace App\Security;
 
-// src/Security/ApiKeyAuthenticator.php
-namespace App\Security;
-
 use App\Repository\ApiTokenRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +15,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 
 class ApiKeyAuthenticator extends AbstractAuthenticator
 {
-    /**
-     * @var ApiTokenRepository
-     */
     private ApiTokenRepository $apiTokenRepo;
 
     public function __construct(ApiTokenRepository $apiTokenRepo)
@@ -53,11 +47,7 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         $data = [
-            // you may want to customize or obfuscate the message first
             'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
-
-            // or to translate this message
-            // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
         ];
 
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
@@ -67,7 +57,6 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
     {
         $authorizationHeader = $request->headers->get('Authorization');
 
-        // skip beyond "Bearer"
         return substr($authorizationHeader, 7);
 
     }
