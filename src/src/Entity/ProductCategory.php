@@ -2,6 +2,7 @@
 namespace App\Entity;
 
 use App\Repository\ProductCategoryRepository;
+use App\Trait\EntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -13,15 +14,11 @@ class ProductCategory
 {
     public const MY_GROUP = "product-category";
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: Types::INTEGER)]
-    #[Ignore]
-    private int $id;
+    use EntityTrait;
 
-    #[ORM\Column(type: 'uuid', unique:TRUE)]
+    #[ORM\Column(type: Types::STRING, unique:TRUE, options:["length" => 64])]
     #[Groups([Product::MY_GROUP, Category::MY_GROUP, self::MY_GROUP])]
-    private Uuid $uuid;
+    private string $uuid;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'productCategories')]
     #[ORM\JoinColumn(nullable: false)]
@@ -35,22 +32,17 @@ class ProductCategory
 
     public function __construct()
     {
-        $this->uuid = Uuid::v6();
+        $this->uuid = (string) Uuid::v6();
     }
 
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getUuid(): Uuid
+    public function getUuid(): string
     {
         return $this->uuid;
     }
 
     public function setUuid(Uuid $uuid): self
     {
-        $this->uuid = $uuid;
+        $this->uuid = (string) $uuid;
 
         return $this;
     }

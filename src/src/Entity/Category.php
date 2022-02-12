@@ -29,14 +29,26 @@ class Category
     #[Groups([self::MY_GROUP])]
     private Collection $productCategories;
 
-    #[ORM\Column(type: 'uuid', unique:TRUE)]
+    #[ORM\Column(type: Types::STRING, unique:TRUE, options:["length" => 64])]
     #[Groups([self::MY_GROUP, ProductCategory::MY_GROUP])]
-    private Uuid $uuid;
+    private string $uuid;
 
     public function __construct()
     {
         $this->uuid = Uuid::v6();
         $this->productCategories = new ArrayCollection();
+    }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(Uuid $uuid): self
+    {
+        $this->uuid = (string) $uuid;
+
+        return $this;
     }
 
     public function getId(): int
@@ -82,18 +94,6 @@ class Category
                 $productCategory->setCategory(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getUuid(): Uuid
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(Uuid $uuid): self
-    {
-        $this->uuid = $uuid;
 
         return $this;
     }

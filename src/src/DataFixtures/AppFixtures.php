@@ -8,9 +8,6 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Uid\Factory\UuidFactory;
-use Symfony\Component\Uid\Uuid;
-use Symfony\Component\Uid\UuidV6;
 
 class AppFixtures extends Fixture
 {

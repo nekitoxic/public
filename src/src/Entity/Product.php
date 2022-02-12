@@ -2,6 +2,7 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use App\Trait\EntityTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,15 +17,11 @@ class Product
 {
     public const MY_GROUP = "product";
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: Types::INTEGER)]
-    #[Ignore]
-    private int $id;
+    use EntityTrait;
 
-    #[ORM\Column(type: 'uuid', unique:TRUE)]
+    #[ORM\Column(type: Types::STRING, unique:TRUE, options:["length" => 64])]
     #[Groups([ProductProperty::MY_GROUP, ProductCategory::MY_GROUP])]
-    private Uuid $uuid;
+    private string $uuid;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Groups([self::MY_GROUP])]
@@ -58,19 +55,14 @@ class Product
         }
     }
 
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getUuid(): Uuid
+    public function getUuid(): string
     {
         return $this->uuid;
     }
 
     public function setUuid(Uuid $uuid): self
     {
-        $this->uuid = $uuid;
+        $this->uuid = (string) $uuid;
 
         return $this;
     }

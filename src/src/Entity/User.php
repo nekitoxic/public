@@ -15,8 +15,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id, ORM\GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
-    #[ORM\Column(type:'uuid', unique:TRUE)]
-    private Uuid $uuid;
+    #[ORM\Column(type: Types::STRING, unique:TRUE, options:["length" => 64])]
+    private string $uuid;
 
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
@@ -42,14 +42,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getUuid(): Uuid
+    public function getUuid(): string
     {
         return $this->uuid;
     }
 
     public function setUuid(Uuid $uuid): self
     {
-        $this->uuid = $uuid;
+        $this->uuid = (string) $uuid;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ApiTokenRepository;
+use App\Trait\EntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 
@@ -11,10 +12,7 @@ class ApiToken
 {
     private const SEVEN_DAYS_SECONDS = 604800;
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: Types::INTEGER)]
-    private int $id;
+    use EntityTrait;
 
     #[ORM\OneToOne(inversedBy: 'apiToken', targetEntity: User::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -31,11 +29,6 @@ class ApiToken
         $this->value        = bin2hex(random_bytes(32));
         $this->owner        = $user;
         $this->createdAt    = time();
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getOwner(): User
