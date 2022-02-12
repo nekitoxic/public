@@ -40,4 +40,4 @@ services:
     image: composer
     volumes:
       - ./src/:/app
-    command: sh -c "composer install"
+    command: sh -c "composer install && chmod -R 777 'vendor'"
