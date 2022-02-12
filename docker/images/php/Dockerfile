@@ -8,4 +8,6 @@ RUN apt-get update && \
     docker-php-ext-enable apcu pdo_pgsql sodium && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp
 
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
 RUN chown 1000:1000 /var/www/html/
